@@ -14,6 +14,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+     matrix:
+      dotnet-version: [ '8.0.x' ]
+
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -28,5 +32,12 @@ jobs:
       run: dotnet build --no-restore
       working-directory: source/fhir-facade
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal -logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
       working-directory: source/fhir-facade
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v4
+      with:
+       name: dotnet-results-${{ matrix.dotnet-version }}
+       path: TestResults-${{ matrix.dotnet-version }}
+       # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}   

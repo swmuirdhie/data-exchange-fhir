@@ -29,15 +29,16 @@ jobs:
       run: dotnet restore
       working-directory: source/fhir-facade
     - name: Build
-      run: dotnet build  --no-restore /logger:FileLogger, Microsoft.Build.CentralLogger 
+      run: dotnet build  --no-restore 
+      # /logger:FileLogger, Microsoft.Build.CentralLogger 
       working-directory: source/fhir-facade/src
     - name: Test
-      run: dotnet test --no-build --verbosity normal -logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      run: dotnet test --no-build --verbosity normal -logger trx --results-directory "TestResults"
       working-directory: source/fhir-facade
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v4
       with:
-       name: dotnet-results-${{ matrix.dotnet-version }}
-       path: TestResults-${{ matrix.dotnet-version }}
+       name: dotnet-results
+       path: TestResults
        # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}   

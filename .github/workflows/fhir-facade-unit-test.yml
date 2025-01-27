@@ -33,7 +33,7 @@ jobs:
       # /logger:FileLogger, Microsoft.Build.CentralLogger 
       working-directory: source/fhir-facade/src
     - name: Test
-      run: dotnet test --no-build --verbosity normal -logger trx --results-directory "TestResults"
+      run: dotnet test --no-build --verbosity normal --logger trx --results-directory "TestResults"
       working-directory: source/fhir-facade
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v4

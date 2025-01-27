@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'spikes/fhir-facade/**'
+      - 'source/fhir-facade/src/**'
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'spikes/fhir-facade/**'
+      - 'source/fhir-facade/src/**'
 
 
 

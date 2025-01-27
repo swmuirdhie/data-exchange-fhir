@@ -20,11 +20,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: source/fhir-facade
     - name: Build
       run: dotnet build --no-restore
-      working-directory: source/fhir-facade/src
+      working-directory: source/fhir-facade
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: source/fhir-facade/src
+      working-directory: source/fhir-facade

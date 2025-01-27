@@ -31,7 +31,7 @@ jobs:
     - name: Build
       run: dotnet build  --no-restore 
       # /logger:FileLogger, Microsoft.Build.CentralLogger 
-      working-directory: source/fhir-facade/src
+      working-directory: source/fhir-facade
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger trx --results-directory "TestResults"
       working-directory: source/fhir-facade

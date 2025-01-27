@@ -68,7 +68,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
        name: dotnet-results
-       working-directory: source/fhir-facade
+       # working-directory: source/fhir-facade
        path: source/fhir-facade/TestResults
        # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}   

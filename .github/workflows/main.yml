@@ -25,9 +25,9 @@ jobs:
 
     # Install ReportGenerator via NuGet (or you can install it globally if not already installed)
     - name: Install ReportGenerator
-      run: |
-        dotnet tool install --global dotnet-reportgenerator-globaltool
-      working-directory: source/fhir-facade/tests/fhir-facade-tests  
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool 
+    # dotnet tool install --global dotnet-reportgenerator-globaltool
+     # working-directory: source/fhir-facade/tests/fhir-facade-tests  
 
     # Build your project (if needed)
     - name: Build project

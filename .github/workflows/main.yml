@@ -19,9 +19,9 @@ jobs:
 
     # Setup .NET (if you're using a .NET project, change accordingly)
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0'  # Set the required .NET version here  
+         dotnet-version: 8.0.x
 
     # Install ReportGenerator via NuGet (or you can install it globally if not already installed)
     - name: Install ReportGenerator

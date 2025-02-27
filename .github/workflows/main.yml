@@ -27,7 +27,7 @@ jobs:
     - name: Install ReportGenerator
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool
-      working-directory: source/fhir-facade  
+      working-directory: source/fhir-facade/tests/fhir-facade-tests  
 
     # Build your project (if needed)
     - name: Build project

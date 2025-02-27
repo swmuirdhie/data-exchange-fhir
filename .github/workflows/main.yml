@@ -1,0 +1,53 @@
+name: Generate Coverage Report
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest  # Or any other runner depending on your environment
+
+    steps:
+    # Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Setup .NET (if you're using a .NET project, change accordingly)
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0'  # Set the required .NET version here
+
+    # Install ReportGenerator via NuGet (or you can install it globally if not already installed)
+    - name: Install ReportGenerator
+      run: |
+        dotnet tool install --global dotnet-reportgenerator-globaltool
+
+    # Build your project (if needed)
+    - name: Build project
+      run: |
+        dotnet build
+
+    # Run tests and generate the coverage file (adjust this for your specific testing framework)
+    - name: Run tests
+      run: |
+        dotnet test --collect:"XPlat Code Coverage"
+
+    # Generate the coverage report
+    - name: Generate Coverage Report
+      run: |
+        reportgenerator -reports:TestResults/coverage.cobertura.xml -targetdir:coveragereport
+      env:
+        PATH: ${{ github.workspace }}/.dotnet/tools:$PATH  # Ensure the .NET tools path is in the environment
+
+    # Upload the coverage report as an artifact (optional, if you want to view it after the job)
+    - name: Upload coverage report artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coveragereport

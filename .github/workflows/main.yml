@@ -21,8 +21,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '5.0'  # Set the required .NET version here
-      working-directory: source/fhir-facade  
+        dotnet-version: '5.0'  # Set the required .NET version here  
 
     # Install ReportGenerator via NuGet (or you can install it globally if not already installed)
     - name: Install ReportGenerator

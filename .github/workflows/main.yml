@@ -35,11 +35,15 @@ jobs:
         dotnet build
       working-directory: source/fhir-facade
 
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --logger trx --results-directory "TestResults" --collect:"XPlat Code Coverage"
+      working-directory: source/fhir-facade
+      
     # Run tests and generate the coverage file (adjust this for your specific testing framework)
-    - name: Run tests
-      run: |
-        dotnet test --collect:"XPlat Code Coverage"
-      working-directory: source/fhir-facade/tests
+   # - name: Run tests
+   #   run:  dotnet test --collect:"XPlat Code Coverage"
+   #   working-directory: source/fhir-facade/tests
 
     # Generate the coverage report
     - name: Generate Coverage Report

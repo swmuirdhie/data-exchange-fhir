@@ -1,13 +1,6 @@
 
 name: .NET Core CI with Code Coverage and ReportGenerator
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:

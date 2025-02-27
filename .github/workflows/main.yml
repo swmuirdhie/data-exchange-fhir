@@ -47,10 +47,9 @@ jobs:
 
     # Generate the coverage report
     - name: Generate Coverage Report
-      run: |
-        reportgenerator -reports:TestResults/coverage.cobertura.xml -targetdir:coveragereport
-      env:
-        PATH: ${{ github.workspace }}/.dotnet/tools:$PATH  # Ensure the .NET tools path is in the environment
+      run: reportgenerator -reports:TestResults/coverage.cobertura.xml -targetdir:coveragereport
+   #   env:
+   #     PATH: ${{ github.workspace }}/.dotnet/tools:$PATH  # Ensure the .NET tools path is in the environment
       working-directory: source/fhir-facade/tests/fhir-facade-tests  
 
     # Upload the coverage report as an artifact (optional, if you want to view it after the job)

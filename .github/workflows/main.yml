@@ -15,7 +15,7 @@ jobs:
     steps:
     # Checkout the code
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     # Setup .NET (if you're using a .NET project, change accordingly)
     - name: Setup .NET

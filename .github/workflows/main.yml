@@ -39,7 +39,7 @@ jobs:
     - name: Run tests
       run: |
         dotnet test --collect:"XPlat Code Coverage"
-      working-directory: source/fhir-facade/tests/fhir-facade-tests
+      working-directory: source/fhir-facade/tests
 
     # Generate the coverage report
     - name: Generate Coverage Report

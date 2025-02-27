@@ -47,7 +47,7 @@ jobs:
 
     # Upload the coverage report as an artifact (optional, if you want to view it after the job)
     - name: Upload coverage report artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-report
         path: coveragereport

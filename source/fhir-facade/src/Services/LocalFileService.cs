@@ -1,26 +1,27 @@
-using OneCDPFHIRFacade.Config;
+// LocalFileService.cs
+// #####################################################
+// SaveResourceLocally
+// #####################################################
+
 using OneCDPFHIRFacade.Utilities;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace OneCDPFHIRFacade.Services
 {
- 
-    public class LocalFileService : IFileService
- 
+    public interface ILocalFileService
+    {
+        Task<IResult> SaveResourceLocally(string folderPath, string resourceType, string fileName, string content);
+    }
+    public class LocalFileService : ILocalFileService
     {
         private readonly LoggingUtility _loggingUtility;
-
         public LocalFileService(LoggingUtility loggingUtility)
         {
-            _loggingUtility = loggingUtility ?? throw new ArgumentNullException(nameof(loggingUtility));
+            this._loggingUtility = loggingUtility;
         }
-
-        public async Task<IResult> SaveResource(string resourceType, string fileName, string content)
+        public async Task<IResult> SaveResourceLocally(string baseDirectory, string subDirectory, string fileName, string resourceJson)
         {
             // Define the directory and file path
-            var directoryPath = Path.Combine(LocalFileStorageConfig.LocalDevFolder!,resourceType);
+            var directoryPath = Path.Combine(baseDirectory, subDirectory);
 
             // Ensure the directory exists
             Directory.CreateDirectory(directoryPath);
@@ -31,16 +32,17 @@ namespace OneCDPFHIRFacade.Services
             // Serialize the resource to JSON and save it to a file asynchronously
             try
             {
-                await File.WriteAllTextAsync(filePath, content);
+                await File.WriteAllTextAsync(filePath, resourceJson);
             }
             catch (Exception ex)
             {
                 return Results.Problem($"Error saving resource to file: {ex.Message}");
             }
 
-            // Log successful save and return the result
             await _loggingUtility.Logging($"Resource saved successfully at {filePath}");
             return Results.Ok($"Resource saved successfully at {filePath}");
-        }
-    }
-}
+        }// .SaveResourceLocally
+    }// .LocalFileService
+
+}// .namespace
+
